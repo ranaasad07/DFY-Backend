@@ -81,10 +81,7 @@ const autoSeedProducts = async () => {
   try {
     const count = await Product.countDocuments();
     if (count === 0) {
-      const jsonPath = path.join(
-        __dirname,
-        "../dfy-store/data/allproducts.json",
-      );
+      const jsonPath = path.join(__dirname, "data/allproducts.json");
       if (fs.existsSync(jsonPath)) {
         const rawData = fs.readFileSync(jsonPath, "utf-8");
         const productsData = JSON.parse(rawData);
