@@ -292,8 +292,12 @@ const googleAuth = async (req, res) => {
 // 4) LOGOUT - just clears the cookie
 // ==================================================================
 const logoutUser = (req, res) => {
+  const isProd = process.env.NODE_ENV === "production";
+
   res.cookie("token", "", {
     httpOnly: true,
+    secure: isProd,
+    sameSite: isProd ? "none" : "lax",
     expires: new Date(0), // instantly expire the cookie
   });
   return res.status(200).json({ message: "Logged out successfully" });
